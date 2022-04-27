@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'my_card.dart';
+import 'students_status.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,8 +12,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomePage(),
+    return const MaterialApp(
+      home: Students_status(),
     );
   }
 }
@@ -30,22 +31,23 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
         child: Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-              Color(0xFF2193b0),
-              //Colors.white,
-              Colors.white
-            ])),
+        // color: const Color(0xff090D22),
+        // decoration: const BoxDecoration(
+        //     gradient: LinearGradient(
+        //         begin: Alignment.topLeft,
+        //         end: Alignment.bottomRight,
+        //         colors: [
+        //       Color(0xFF2193b0),
+        //       //Colors.white,
+        //       Colors.white
+        //     ])),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                children: [
+                children: const [
                   CircleAvatar(
                     backgroundImage: AssetImage("images/img.jpg"),
                     radius: 25,
@@ -55,11 +57,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Text(
                     "Hi, Mantraraj",
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: 24, color: Colors.black),
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Expanded(
@@ -69,10 +71,10 @@ class _HomePageState extends State<HomePage> {
                     MyCard(),
                     MyCard(),
                     MyCard(),
+                    MyCard(),
                   ],
                 ),
               ),
-
             ],
           ),
         ),
@@ -81,4 +83,3 @@ class _HomePageState extends State<HomePage> {
     ));
   }
 }
-

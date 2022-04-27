@@ -9,19 +9,22 @@ class MyCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          color: Color(0xFFf9f9fb),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          color: const Color(0xFFD0D0D0),
           elevation: 8,
           child: Container(
-            height: MediaQuery.of(context).size.height / 3.75,
-            //width: MediaQuery.of(context).size.width / 1.2,
+            color: Color(0xffDCDFDF),
+            height: MediaQuery.of(context).size.height / 4.4,
+            // width: MediaQuery.of(context).size.width / 2.5,
             child: Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       ClipRRect(
@@ -30,7 +33,7 @@ class MyCard extends StatelessWidget {
                         child: Image(
                           height: MediaQuery.of(context).size.height / 12,
                           width: MediaQuery.of(context).size.width / 9,
-                          image: AssetImage("images/img.jpg"),
+                          image: const AssetImage("images/img.jpg"),
                         ),
                       ),
                       // SizedBox(
@@ -38,42 +41,61 @@ class MyCard extends StatelessWidget {
                       // ),
                       Expanded(
                         child: ListTile(
-                          title: Text("Ml/AI internship"),
-                          subtitle: Text("Rahul Kala"),
+                          title: const Text("Ml/AI internship"),
+                          subtitle: const Text("Rahul Kala"),
                           trailing: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
-                                  color: Colors.green
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 5),
-                                child: Text("Available",style: TextStyle(color: Colors.white),),
+                                  color: Colors.green),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 5),
+                                child: Text(
+                                  "Available",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               )),
                         ),
                       ),
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 15,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            children: [
-                              FaIcon(FontAwesomeIcons.circlePlay,size: 20,),
-                              SizedBox(width: 5,),
-                              Text("Start Date : 1 May 2022"),
+                            children: const [
+                              FaIcon(
+                                FontAwesomeIcons.circlePlay,
+                                size: 15,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text("Start on : 1 May 2022"),
                             ],
                           ),
-                          SizedBox(height: 10,),
+                          const SizedBox(
+                            height: 15,
+                          ),
                           Row(
-                            children: [
-                              FaIcon(FontAwesomeIcons.calendar,size: 20,),
-                              SizedBox(width: 5,),
+                            children: const [
+                              FaIcon(
+                                FontAwesomeIcons.calendar,
+                                size: 15,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
                               Text("Duration : 1 Month"),
                             ],
                           )
@@ -81,22 +103,35 @@ class MyCard extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 5, vertical: 8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            children: [
-                              FaIcon(FontAwesomeIcons.moneyBill1Wave,size: 20,),
-                              SizedBox(width: 5,),
+                            children: const [
+                              FaIcon(
+                                FontAwesomeIcons.moneyBill1Wave,
+                                size: 15,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
                               Text("Stipend: 10000 Rs"),
                             ],
                           ),
-                          SizedBox(height: 10,),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           Row(
-                            children: [
-                              FaIcon(FontAwesomeIcons.house,size: 20,),
-                              SizedBox(width: 5,),
+                            children: const [
+                              FaIcon(
+                                FontAwesomeIcons.house,
+                                size: 15,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
                               Text("Work From Home"),
                             ],
                           )
