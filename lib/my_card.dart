@@ -10,7 +10,7 @@ class MyCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          color: Color(0xFFf9f9fb),
+          color: Color(0xFFeef2fc),
           elevation: 8,
           child: Container(
             height: MediaQuery.of(context).size.height / 3.75,
