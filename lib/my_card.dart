@@ -48,7 +48,8 @@ class MyCard extends StatelessWidget {
                           trailing: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
-                                  color: status == "Accepted"
+                                  color: (status == "Accepted" ||
+                                          status == "Available")
                                       ? Colors.green
                                       : (status == "Pending"
                                           ? Colors.grey
