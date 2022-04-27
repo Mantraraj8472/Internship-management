@@ -67,11 +67,21 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: ListView(
                   children: [
-                    MyCard(),
-                    MyCard(),
-                    MyCard(),
-                    MyCard(),
-                    MyCard(),
+                    MyCard(
+                      status: 'Available',
+                    ),
+                    MyCard(
+                      status: 'Available',
+                    ),
+                    MyCard(
+                      status: 'Available',
+                    ),
+                    MyCard(
+                      status: 'Available',
+                    ),
+                    MyCard(
+                      status: 'Available',
+                    ),
                   ],
                 ),
               ),

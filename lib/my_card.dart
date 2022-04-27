@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MyCard extends StatelessWidget {
+  String status;
+  MyCard({required this.status});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -15,7 +17,7 @@ class MyCard extends StatelessWidget {
           color: const Color(0xFFD0D0D0),
           elevation: 8,
           child: Container(
-            color: Color(0xffDCDFDF),
+            color: Color(0xffDEE0E0),
             height: MediaQuery.of(context).size.height / 4.4,
             // width: MediaQuery.of(context).size.width / 2.5,
             child: Column(
@@ -46,12 +48,16 @@ class MyCard extends StatelessWidget {
                           trailing: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
-                                  color: Colors.green),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(
+                                  color: status == "Accepted"
+                                      ? Colors.green
+                                      : (status == "Pending"
+                                          ? Colors.grey
+                                          : Colors.red)),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 5),
                                 child: Text(
-                                  "Available",
+                                  "$status",
                                   style: TextStyle(color: Colors.white),
                                 ),
                               )),

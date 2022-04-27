@@ -34,9 +34,15 @@ class Students_status extends StatelessWidget {
                 Expanded(
                   child: ListView(
                     children: [
-                      MyCard(),
-                      MyCard(),
-                      MyCard(),
+                      MyCard(
+                        status: 'Accepted',
+                      ),
+                      MyCard(
+                        status: 'Pending',
+                      ),
+                      MyCard(
+                        status: 'Rejected',
+                      ),
                     ],
                   ),
                 ),
