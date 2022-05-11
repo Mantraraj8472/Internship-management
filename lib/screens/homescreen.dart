@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:internship_management/my_card.dart';
+import 'package:internship_management/widgets/my_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: 10,
                   ),
                   Text(
-                    "Hi, Mantraraj",
+                    "Hi, Samarth",
                     style: TextStyle(fontSize: 24),
                   ),
                 ],

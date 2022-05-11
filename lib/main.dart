@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:internship_management/screens/internship_page.dart';
 
-import 'my_card.dart';
-import 'students_status.dart';
+import 'widgets/my_card.dart';
+
 import 'screens/homepage.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: HomePage(),
+      home: InternshipScreen(),
     );
   }
 }

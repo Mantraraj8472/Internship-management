@@ -12,13 +12,13 @@ class MyCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Card(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(10),
           ),
           color: const Color(0xFFD0D0D0),
           elevation: 8,
           child: Container(
             color: Color(0xffDEE0E0),
-            height: MediaQuery.of(context).size.height / 4.4,
+            height: MediaQuery.of(context).size.height / 3.75,
             // width: MediaQuery.of(context).size.width / 2.5,
             child: Column(
               children: [

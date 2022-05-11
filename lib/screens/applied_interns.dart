@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:internship_management/my_card.dart';
+import 'package:internship_management/widgets/my_card.dart';
 
 class Applied_Interns extends StatefulWidget {
   const Applied_Interns({Key? key}) : super(key: key);
