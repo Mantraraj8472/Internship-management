@@ -1,15 +1,37 @@
+
 import 'package:flutter/material.dart';
 
-class InternshipScreen extends StatefulWidget {
-  const InternshipScreen({Key? key}) : super(key: key);
+class InternshipScreen extends StatelessWidget {
 
-  @override
-  _InternshipScreenState createState() => _InternshipScreenState();
-}
+  bool faculty;
+  Map<String,dynamic>data;
+  InternshipScreen({required this.faculty,required this.data});
 
-class _InternshipScreenState extends State<InternshipScreen> {
+
+  List<Widget>skills = [];
+  List<Widget>exp= [];
+
   @override
   Widget build(BuildContext context) {
+
+    for(var i in data["internships"]["requirements"]["skills"]){
+      skills.add(Row(
+        children: [
+          Icon(Icons.stop,size: 10,),
+          Text(i["skill"]),
+        ],
+      ),);
+    }
+
+    for(var i in data["internships"]["expectations"]){
+      exp.add(Row(
+        children: [
+          Icon(Icons.stop,size: 10,),
+          Text(i["expectation"]),
+        ],
+      ),);
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white.withOpacity(0),
@@ -27,9 +49,51 @@ class _InternshipScreenState extends State<InternshipScreen> {
               SizedBox(
                 height: 10,
               ),
-              Text("ML/AI Internship",style: TextStyle(fontSize: 24),),
-              Text("Dr. Rahul Kala",style: TextStyle(fontSize: 20,color: Colors.grey),),
+              Text(data["internships"]["name"],style: TextStyle(fontSize: 24),),
+              Text(data["faculty"]["name"],style: TextStyle(fontSize: 20,color: Colors.grey),),
               SizedBox(height: 10,),
+              (faculty ? Row(children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: (context) => RegisterScreen()));
+                      },
+                      child: const Text("See Applicants"),
+                      style: ElevatedButton.styleFrom(
+                          primary:Color(0xFF304675),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          //minimumSize: Size(250,42)
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: (context) => RegisterScreen()));
+                      },
+                      child: const Text("Close",style: TextStyle(color: Color(0xFF304675)),),
+                      style: ElevatedButton.styleFrom(
+                        side: BorderSide(width: 2,color:Color(0xFF304675) ),
+                          primary:Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            
+                          ),
+                          //minimumSize: Size(250,42)
+                      ),
+                    ),
+                  ),
+                ),
+              ],) : SizedBox()),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
@@ -47,17 +111,17 @@ class _InternshipScreenState extends State<InternshipScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Course : Artificial Intelligence"),
-                            Text("Start Date : 22 May 2022"),
-                            Text("End Date : 22 May 2022"),
+                            Text("Course : ${data["internships"]["course"]}"),
+                            Text("Start Date : ${data["internships"]["startDate"].toString().substring(0,10)}"),
+                            Text("End Date : ${data["internships"]["endDate"].toString().substring(0,10)}"),
                           ],
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text("Available : true"),
-                            Text("Stipend : 100000/month"),
-                            Text("Mode : Work From Home"),
+                            Text("Available : ${data["internships"]["isAvailable"]}"),
+                            Text("Stipend : ${data["internships"]["stipend"]}"),
+                            Text("Mode : ${data["internships"]["mode"]}"),
                           ],
                         ),
                       ],
@@ -76,33 +140,26 @@ class _InternshipScreenState extends State<InternshipScreen> {
                   ),
                   child: Column(
                     children: [
-                      Text("Requirments :"),
+                      Text("Requirements :"),
                       Row(
                         children: [
                           Icon(Icons.stop,size: 10,),
-                          Text("Cg > 8.5"),
+                          Text("Cg : ${data["internships"]["requirements"]["cg"]}"),
                         ],
                       ),
                       Text("Skills :"),
-                      Row(
-                        children: [
-                          Icon(Icons.stop,size: 10,),
-                          Text("Skill 1"),
-                        ],
+                      Column(
+                        children: skills,
                       ),
-                      Row(
-                        children: [
-                          Icon(Icons.stop,size: 10,),
-                          Text("Skill 2"),
-                        ],
-                      ),
+                      Text("Expectations :"),
+                      Column(
 
-                    
+                      )
                     ],
                   ),
                 ),
               ),
-              Padding(
+              (faculty ? SizedBox() : Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   onPressed: () {
@@ -118,7 +175,7 @@ class _InternshipScreenState extends State<InternshipScreen> {
                       minimumSize: Size(250,42)
                   ),
                 ),
-              ),
+              )),
             ],
           ),
         ),

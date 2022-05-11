@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:internship_management/networking.dart';
+import 'package:internship_management/screens/internship_page.dart';
 
 class MyCard extends StatelessWidget {
   String status;
-  MyCard({required this.status});
+  String name;
+  String prof;
+  String start;
+  String dur;
+  String stipend;
+  String mode;
+  bool isfac;
+  String id;
+  MyCard({required this.status,required this.mode,required this.stipend,required this.dur,required this.start,required this.prof,required this.name,required this.isfac,required this.id});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () async{
+        Map<String,dynamic>mp;
+        mp = await func.getinterndata(id);
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>InternshipScreen(faculty: isfac,data: mp,)));
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Card(
@@ -43,15 +57,15 @@ class MyCard extends StatelessWidget {
                       // ),
                       Expanded(
                         child: ListTile(
-                          title: const Text("Ml/AI internship"),
-                          subtitle: const Text("Rahul Kala"),
+                          title:  Text(name),
+                          subtitle: Text(prof),
                           trailing: Container(
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
                                   color: (status == "Accepted" ||
-                                          status == "Available")
+                                          status == "Available" || status == "Active")
                                       ? Colors.green
-                                      : (status == "Pending"
+                                      : ((status == "Pending")
                                           ? Colors.grey
                                           : Colors.red)),
                               child: Padding(
@@ -80,7 +94,7 @@ class MyCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            children: const [
+                            children:  [
                               FaIcon(
                                 FontAwesomeIcons.circlePlay,
                                 size: 15,
@@ -88,14 +102,14 @@ class MyCard extends StatelessWidget {
                               SizedBox(
                                 width: 5,
                               ),
-                              Text("Start on : 1 May 2022"),
+                              Text("Start on : ${start.substring(0,10) }"),
                             ],
                           ),
                           const SizedBox(
                             height: 15,
                           ),
                           Row(
-                            children: const [
+                            children: [
                               FaIcon(
                                 FontAwesomeIcons.calendar,
                                 size: 15,
@@ -103,7 +117,7 @@ class MyCard extends StatelessWidget {
                               SizedBox(
                                 width: 5,
                               ),
-                              Text("Duration : 1 Month"),
+                              Text("End date : ${dur.substring(0,10)}"),
                             ],
                           )
                         ],
@@ -116,7 +130,7 @@ class MyCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            children: const [
+                            children:  [
                               FaIcon(
                                 FontAwesomeIcons.moneyBill1Wave,
                                 size: 15,
@@ -124,14 +138,14 @@ class MyCard extends StatelessWidget {
                               SizedBox(
                                 width: 5,
                               ),
-                              Text("Stipend: 10000 Rs"),
+                              Text("Stipend: $stipend"),
                             ],
                           ),
                           const SizedBox(
                             height: 10,
                           ),
                           Row(
-                            children: const [
+                            children: [
                               FaIcon(
                                 FontAwesomeIcons.house,
                                 size: 15,
@@ -139,7 +153,7 @@ class MyCard extends StatelessWidget {
                               SizedBox(
                                 width: 5,
                               ),
-                              Text("Work From Home"),
+                              Text(mode),
                             ],
                           )
                         ],

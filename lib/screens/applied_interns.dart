@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:internship_management/widgets/my_card.dart';
+import 'package:internship_management/networking.dart';
 
 class Applied_Interns extends StatefulWidget {
   const Applied_Interns({Key? key}) : super(key: key);
@@ -9,6 +10,12 @@ class Applied_Interns extends StatefulWidget {
 }
 
 class _Applied_InternsState extends State<Applied_Interns> {
+  Map<String, dynamic> mp = {};
+
+  Future getData() async {
+    mp = await func.getmyinterns();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,20 +42,34 @@ class _Applied_InternsState extends State<Applied_Interns> {
               const SizedBox(
                 height: 30,
               ),
-              Expanded(
-                child: ListView(
-                  children: [
-                    MyCard(
-                      status: 'Accepted',
-                    ),
-                    MyCard(
-                      status: 'Pending',
-                    ),
-                    MyCard(
-                      status: 'Rejected',
-                    ),
-                  ],
-                ),
+              FutureBuilder(
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return Expanded(
+                      child: ListView.builder(
+                          itemCount: mp["student"].length,
+                          itemBuilder: (context, index) {
+                            return MyCard(
+                              status: (mp["student"][index]["status"] == "R") ? "Closed" : (mp["student"][index]["status"] == "A")? "Accepted" : "Pending" ,
+                              name: mp["internships"][index]["name"],
+                              start: mp["internships"][index]["startDate"],
+                              stipend: mp["internships"][index]["stipend"],
+                              dur: mp["internships"][index]["endDate"],
+                              mode: mp["internships"][index]["mode"],
+                              prof: mp["faculty"][index],
+                              isfac: false,
+                              id: mp["student"][index]["id"],
+                            );
+                          }),
+                    );
+                  }
+
+                  print(snapshot.connectionState);
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+                future: getData(),
               ),
             ],
           ),

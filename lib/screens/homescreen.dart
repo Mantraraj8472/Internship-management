@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:internship_management/widgets/my_card.dart';
+import 'package:internship_management/networking.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -9,6 +10,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  Map<String,dynamic>mp={};
+
+  Future getData()async{
+
+    mp = await func.getAllintern();
+  }
+ // asdawdasd
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,23 +56,25 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 30,
               ),
-              Expanded(
-                child: ListView(
-                  children: [
-                    MyCard(
-                      status: "Available",
-                    ),
-                    MyCard(
-                      status: "Available",
-                    ),
-                    MyCard(
-                      status: "Available",
-                    ),
-                    MyCard(
-                      status: "Available",
-                    ),
-                  ],
-                ),
+              FutureBuilder(
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return Expanded(
+                      child: ListView.builder(
+                          itemCount: mp["internships"].length,
+                          itemBuilder: (context, index) {
+                            return MyCard(status: "Available",name: mp["internships"][index]["name"],start: mp["internships"][index]["startDate"],stipend: mp["internships"][index]["stipend"],dur: mp["internships"][index]["endDate"],mode: mp["internships"][index]["mode"],prof: mp["faculty"][index],isfac: false,id: mp["internships"][index]["_id"],);
+
+                          }),
+                    );
+                  }
+
+                  print(snapshot.connectionState);
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+                future: getData(),
               ),
             ],
           ),
@@ -72,3 +83,5 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+

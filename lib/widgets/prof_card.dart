@@ -1,12 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:internship_management/networking.dart';
 
 class ProffCard extends StatelessWidget {
 
+  String name;
+  List<dynamic>qualifications;
+  String num;
+  String des;
+  String contact;
+  String link;
+  String id;
+
+  ProffCard({required this.name,required this.num,required this.link,required this.contact,required this.des,required this.qualifications,required this.id});
+
   @override
   Widget build(BuildContext context) {
+
+    List<Widget>q=[];
+
+    for(var i in qualifications){
+
+      q.add(Text(i["qualification"] + " "));
+
+    }
+
+
     return GestureDetector(
-      onTap: () {},
+      onTap: () async{
+        await func.getAllFacultyInterns(id);
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Card(
@@ -42,8 +65,8 @@ class ProffCard extends StatelessWidget {
                       // ),
                       Expanded(
                         child: ListTile(
-                          title: const Text("Dr. Rahul Kala"),
-                          subtitle: const Text("Phd, M.Sc"),
+                          title: Text(name),
+                          subtitle: Row(children: q,),
                           trailing: Container(
                             width: MediaQuery.of(context).size.width/4,
                               decoration: BoxDecoration(
@@ -53,7 +76,7 @@ class ProffCard extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 5),
                                 child: Text(
-                                  "Internships Available : 23",
+                                  "Internships Opened : $num",
                                   style: TextStyle(color: Colors.white),
                                 ),
                               )),
@@ -66,9 +89,9 @@ class ProffCard extends StatelessWidget {
                   height: 15,
                 ),
 
-                Text("description"),
-                Text("Contact no. 111111111"),
-                Text("site link")
+                Text(des),
+                Text(contact),
+                Text(link)
 
               ],
             ),
