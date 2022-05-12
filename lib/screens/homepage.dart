@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:internship_management/networking.dart';
 import '../widgets/my_card.dart';
 import 'package:internship_management/screens/applied_interns.dart';
 import 'package:internship_management/screens/proffesor_page.dart';
@@ -27,8 +28,8 @@ class _HomePageState extends State<HomePage> {
     HomeScreen(),
     Applied_Interns(),
     Proffesor_Page(),
-    Chat_Page(),
-    Profile_Page()
+    ChatPage(),
+    Profile_Page(id: userId,)
   ];
 
   @override

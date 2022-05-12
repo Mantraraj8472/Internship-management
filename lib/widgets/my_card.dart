@@ -11,16 +11,16 @@ class MyCard extends StatelessWidget {
   String dur;
   String stipend;
   String mode;
-  bool isfac;
+  int faculty;
   String id;
-  MyCard({required this.status,required this.mode,required this.stipend,required this.dur,required this.start,required this.prof,required this.name,required this.isfac,required this.id});
+  MyCard({required this.status,required this.mode,required this.stipend,required this.dur,required this.start,required this.prof,required this.name,required this.faculty,required this.id});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async{
         Map<String,dynamic>mp;
         mp = await func.getinterndata(id);
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>InternshipScreen(faculty: isfac,data: mp,)));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>InternshipScreen(faculty: faculty,data: mp,)));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:internship_management/screens/faculty/faculty_homepage.dart';
 
 import '../networking.dart';
 import 'homepage.dart';
@@ -21,17 +22,17 @@ const ktextfield = InputDecoration(
 );
 
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class FacultySignUpPage extends StatefulWidget {
+  const FacultySignUpPage({Key? key}) : super(key: key);
 
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _FacultySignUpPageState createState() => _FacultySignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _FacultySignUpPageState extends State<FacultySignUpPage> {
 
-  late String branch,currsem , name,yearofgrad , number, email, pass,degree,institute,resume;
-  List<Map<String,String>>skills=[];
+  late String site,desc , name , number, email, pass;
+  List<Map<String,String>>qualifications=[];
   List<Widget> sk = [];
   List<String> ski = [];
   int index2 = -1;
@@ -40,7 +41,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Register as Student"),
+        title: Text("Register as Faculty"),
         backgroundColor: Color(0xFF304675),
       ),
       body: SingleChildScrollView(
@@ -59,51 +60,24 @@ class _SignUpPageState extends State<SignUpPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: TextField(
-                decoration: ktextfield.copyWith(hintText: "Degree"),
+                decoration: ktextfield.copyWith(hintText: "Description"),
                 onChanged: (String value) {
-                  degree = value;
+                  desc = value;
                 },
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: TextField(
-                decoration: ktextfield.copyWith(hintText: "Branch"),
+                decoration: ktextfield.copyWith(hintText: "Site Link"),
                 onChanged: (String value) {
-                  branch = value;
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: TextField(
-                decoration: ktextfield.copyWith(hintText: "Current Semester"),
-                onChanged: (String value) {
-                 currsem = value;
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: TextField(
-                decoration: ktextfield.copyWith(hintText: "Year of Graduation"),
-                onChanged: (String value) {
-                  yearofgrad = value;
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: TextField(
-                decoration: ktextfield.copyWith(hintText: "Institute"),
-                onChanged: (String value) {
-                  institute = value;
+                  site = value;
                 },
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20),
-              child: Text("Skills :"),
+              child: Text("Qualifications :"),
             ),
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: sk),
             Padding(
@@ -117,7 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             horizontal: 20, vertical: 10),
                         child: TextField(
                           decoration:
-                          ktextfield.copyWith(hintText: "skill"),
+                          ktextfield.copyWith(hintText: "Qualification"),
                           onChanged: (String value) {
                             ski[index2] = value;
                           },
@@ -128,16 +102,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       index2++;
                     });
                   },
-                  child: Text("+Add Skill")),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: TextField(
-                decoration: ktextfield.copyWith(hintText: "Resume Link"),
-                onChanged: (String value) {
-                  resume = value;
-                },
-              ),
+                  child: Text("+Add Qualification")),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -176,13 +141,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   onPressed: () async {
 
                     for(var i in ski){
-                      skills.add({"ability" : i});
+                      qualifications.add({"qualification" : i});
                     }
 
-                    if (await func.signupStudent(email, pass, name, degree, branch, currsem, yearofgrad, resume, institute, number, skills)) {
+                    if (await func.signupFaculty(email, pass, name, desc, site, number, qualifications)) {
                       //await func.profileinfo(email);
                       //String name = await func.userpower();
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>FacultyHome()));
 
                     } else {
                       const snackbar = SnackBar(

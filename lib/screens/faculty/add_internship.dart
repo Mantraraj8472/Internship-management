@@ -1,12 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../networking.dart';
-import 'homepage.dart';
-
+import 'faculty_homepage.dart';
+import 'package:internship_management/networking.dart';
 
 const ktextfield = InputDecoration(
-  contentPadding:
-  EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+  contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   border: OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(10.0)),
   ),
@@ -20,18 +18,29 @@ const ktextfield = InputDecoration(
   ),
 );
 
-
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class AddInternship extends StatefulWidget {
+  const AddInternship({Key? key}) : super(key: key);
 
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _AddInternshipState createState() => _AddInternshipState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _AddInternshipState extends State<AddInternship> {
+  String name = "";
+  String start = "";
+  String end = "";
+  String course = "";
+  String vacancies = "";
+  String mode = "";
+  String stipend = "";
+  List<Map<String, String>> expec = [];
+  String cg = "";
+  List<Map<String, String>> skills = [];
 
-  late String branch,currsem , name,yearofgrad , number, email, pass,degree,institute,resume;
-  List<Map<String,String>>skills=[];
+  List<Widget> ex = [];
+  List<String> exp = [];
+  int index = -1;
+
   List<Widget> sk = [];
   List<String> ski = [];
   int index2 = -1;
@@ -40,7 +49,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Register as Student"),
+        title: Text("Add Internship"),
         backgroundColor: Color(0xFF304675),
       ),
       body: SingleChildScrollView(
@@ -59,51 +68,98 @@ class _SignUpPageState extends State<SignUpPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: TextField(
-                decoration: ktextfield.copyWith(hintText: "Degree"),
+                decoration: ktextfield.copyWith(hintText: "Start Date"),
                 onChanged: (String value) {
-                  degree = value;
+                  start = value;
                 },
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: TextField(
-                decoration: ktextfield.copyWith(hintText: "Branch"),
+                decoration: ktextfield.copyWith(hintText: "End Date"),
                 onChanged: (String value) {
-                  branch = value;
+                  end = value;
                 },
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: TextField(
-                decoration: ktextfield.copyWith(hintText: "Current Semester"),
+                decoration: ktextfield.copyWith(hintText: "Course"),
                 onChanged: (String value) {
-                 currsem = value;
+                  course = value;
                 },
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: TextField(
-                decoration: ktextfield.copyWith(hintText: "Year of Graduation"),
+                decoration: ktextfield.copyWith(hintText: "Stipend"),
                 onChanged: (String value) {
-                  yearofgrad = value;
+                  stipend = value;
                 },
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: TextField(
-                decoration: ktextfield.copyWith(hintText: "Institute"),
+                decoration: ktextfield.copyWith(hintText: "Mode"),
                 onChanged: (String value) {
-                  institute = value;
+                  mode = value;
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: TextField(
+                decoration: ktextfield.copyWith(hintText: "Vacancies"),
+                onChanged: (String value) {
+                  vacancies = value;
                 },
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20),
-              child: Text("Skills :"),
+              child: Text("Expectations :"),
+            ),
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: ex),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: TextButton(
+                  onPressed: () {
+                    exp.add("");
+                    ex.add(
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        child: TextField(
+                          decoration:
+                              ktextfield.copyWith(hintText: "Expectation"),
+                          onChanged: (String value) {
+                            exp[index] = value;
+                          },
+                        ),
+                      ),
+                    );
+                    setState(() {
+                      index++;
+                    });
+                  },
+                  child: Text("+Add Expectation")),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text("Requirements :"),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: TextField(
+                decoration: ktextfield.copyWith(hintText: "Cg"),
+                onChanged: (String value) {
+                  cg = value;
+                },
+              ),
             ),
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: sk),
             Padding(
@@ -117,7 +173,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             horizontal: 20, vertical: 10),
                         child: TextField(
                           decoration:
-                          ktextfield.copyWith(hintText: "skill"),
+                              ktextfield.copyWith(hintText: "skill"),
                           onChanged: (String value) {
                             ski[index2] = value;
                           },
@@ -130,67 +186,30 @@ class _SignUpPageState extends State<SignUpPage> {
                   },
                   child: Text("+Add Skill")),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: TextField(
-                decoration: ktextfield.copyWith(hintText: "Resume Link"),
-                onChanged: (String value) {
-                  resume = value;
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: TextField(
-                decoration: ktextfield.copyWith(hintText: "Number"),
-                onChanged: (String value) {
-                  number = value;
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: TextField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: ktextfield.copyWith(hintText: "Email"),
-                onChanged: (String value) {
-                  email = value;
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: TextField(
-                keyboardType: TextInputType.visiblePassword,
-                obscureText: true,
-                decoration: ktextfield.copyWith(hintText: "Password"),
-                onChanged: (String value) {
-                  pass = value;
-                },
-              ),
-            ),
             Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: ElevatedButton(
-                  onPressed: () async {
-
-                    for(var i in ski){
-                      skills.add({"ability" : i});
+                  onPressed: () async{
+                    print(exp);
+                    for(var i in exp){
+                      expec.add({"expectation" : i});
                     }
-
-                    if (await func.signupStudent(email, pass, name, degree, branch, currsem, yearofgrad, resume, institute, number, skills)) {
+                    for(var i in ski){
+                      skills.add({"skill" : i});
+                    }
+                    if (await func.addInternship(name, start, end, course, vacancies, expec, cg, skills,mode,stipend)) {
                       //await func.profileinfo(email);
                       //String name = await func.userpower();
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>FacultyHome()));
 
                     } else {
                       const snackbar = SnackBar(
                         backgroundColor: Colors.blueGrey,
                         behavior: SnackBarBehavior.floating,
                         content: Text(
-                          "Incorrect User Credentials",
-                          style: TextStyle(color: Colors.white),
+                          "Something went wrong",
+                          style: TextStyle(color: Colors.red),
                         ),
                       );
                       ScaffoldMessenger.of(context).showSnackBar(snackbar);

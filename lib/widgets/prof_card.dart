@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:internship_management/networking.dart';
+import 'package:internship_management/screens/prof_interns.dart';
 
 class ProffCard extends StatelessWidget {
 
@@ -11,8 +12,9 @@ class ProffCard extends StatelessWidget {
   String contact;
   String link;
   String id;
+  int faculty;
 
-  ProffCard({required this.name,required this.num,required this.link,required this.contact,required this.des,required this.qualifications,required this.id});
+  ProffCard({required this.name,required this.num,required this.link,required this.contact,required this.des,required this.qualifications,required this.id,required this.faculty});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,8 @@ class ProffCard extends StatelessWidget {
 
 
     return GestureDetector(
-      onTap: () async{
-        await func.getAllFacultyInterns(id);
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>ProffesorInterns(id: id, name: name,faculty:(faculty==1) ? 3 : 2,)));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
@@ -43,6 +45,7 @@ class ProffCard extends StatelessWidget {
             height: MediaQuery.of(context).size.height / 3.75,
             // width: MediaQuery.of(context).size.width / 2.5,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -86,12 +89,19 @@ class ProffCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 5,
                 ),
 
-                Text(des),
-                Text(contact),
-                Text(link)
+                Center(child: Text(des,style: TextStyle(fontSize: 16),)),
+                SizedBox(height: 10,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2.5,horizontal: 20),
+                  child: Text("Contact No. : $contact",style: TextStyle(fontSize: 16),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2.5,horizontal: 20),
+                  child: Text("Website : $link",style: TextStyle(fontSize: 16),),
+                )
 
               ],
             ),

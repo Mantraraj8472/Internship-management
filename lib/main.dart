@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:internship_management/screens/faculty/faculty_chat_screen.dart';
 import 'package:internship_management/screens/faculty/faculty_homepage.dart';
 import 'package:internship_management/screens/internship_page.dart';
 import 'package:internship_management/screens/loginscreen.dart';
@@ -18,8 +19,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home:HomePage(),
+    return MaterialApp(
+      home:Loginpage(),
     );
   }
 }

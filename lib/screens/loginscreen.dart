@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:internship_management/networking.dart';
+import 'package:internship_management/screens/faculty/faculty_homepage.dart';
+import 'package:internship_management/screens/faculty_signup.dart';
+import 'package:internship_management/screens/homepage.dart';
+import 'package:internship_management/screens/signupscreen.dart';
 
 
 const ktextfield = InputDecoration(
@@ -71,51 +76,74 @@ class _LoginpageState extends State<Loginpage> {
               child: ElevatedButton(
                 onPressed: () async {
 
-                  // if (await func.signin(email, password)) {
-                  //   //await func.profileinfo(email);
-                  //   //String name = await func.userpower();
-                  //   Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                  if (await func.signin(email, password)) {
+                    //await func.profileinfo(email);
+                    //String name = await func.userpower();
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>(isfac) ? FacultyHome() : HomePage()));
 
-                  // } else {
-                  //   const snackbar = SnackBar(
-                  //     backgroundColor: Colors.blueGrey,
-                  //     behavior: SnackBarBehavior.floating,
-                  //     content: Text(
-                  //       "Incorrect User Credentials",
-                  //       style: TextStyle(color: Colors.red),
-                  //     ),
-                  //   );
-                  //   ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                  // }
+                  } else {
+                    const snackbar = SnackBar(
+                      backgroundColor: Colors.blueGrey,
+                      behavior: SnackBarBehavior.floating,
+                      content: Text(
+                        "Incorrect User Credentials",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Color(0xFF304675),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  minimumSize: Size(250, 42),
+                  minimumSize: Size(315, 42),
                 ),
                 child: const Text("Log In"),
               ),
             ),
             Text("Not a member? "),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20,0,20,20),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => RegisterScreen()));
-                },
-                child: const Text("Sign Up",style: TextStyle(color: Color(0xFF304675)),),
-                style: ElevatedButton.styleFrom(
-                    side: BorderSide(width: 2,color:Color(0xFF304675) ),
-                    primary: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20,0,5,20),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SignUpPage()));
+                    },
+                    child: const Text("Sign Up As Student",style: TextStyle(color: Color(0xFF304675)),),
+                    style: ElevatedButton.styleFrom(
+                        side: BorderSide(width: 2,color:Color(0xFF304675) ),
+                        primary: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        minimumSize: Size(150,42)
                     ),
-                    minimumSize: Size(250,42)
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5,0,20,20),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => FacultySignUpPage()));
+                    },
+                    child: const Text("Sign Up As Faculty",style: TextStyle(color: Color(0xFF304675)),),
+                    style: ElevatedButton.styleFrom(
+                        side: BorderSide(width: 2,color:Color(0xFF304675) ),
+                        primary: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        minimumSize: Size(150,42)
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

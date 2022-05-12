@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:internship_management/screens/faculty/add_internship.dart';
 import 'package:internship_management/widgets/my_card.dart';
 import 'package:internship_management/networking.dart';
+
+import '../loginscreen.dart';
 
 class FacultyHomeScreen extends StatefulWidget {
   const FacultyHomeScreen({Key? key}) : super(key: key);
@@ -10,6 +13,12 @@ class FacultyHomeScreen extends StatefulWidget {
 }
 
 class _FacultyHomeScreenState extends State<FacultyHomeScreen> {
+
+  Map<String,dynamic>mp={};
+  Future getData()async{
+    mp = await func.getAllFacultyInternsHome();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -43,6 +52,10 @@ class _FacultyHomeScreenState extends State<FacultyHomeScreen> {
                     "Welcome, Dr.Rahul Kala",
                     style: TextStyle(fontSize: 24),
                   ),
+                  IconButton(onPressed: ()async{
+                    await func.logout();
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> Loginpage()));
+                  }, icon: Icon(Icons.logout))
                 ],
               ),
               SizedBox(
@@ -51,8 +64,8 @@ class _FacultyHomeScreenState extends State<FacultyHomeScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                  onPressed: () async{
-                   await Functions().signin();
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>AddInternship()));
                   },
                   child: const Text("+ Add New Internship",style: TextStyle(color: Color(0xFF304675),fontSize: 18),),
                   style: ElevatedButton.styleFrom(
@@ -66,23 +79,25 @@ class _FacultyHomeScreenState extends State<FacultyHomeScreen> {
                   ),
                 ),
               ),
-              Expanded(
-                child: ListView(
-                  children: [
-                    // MyCard(
-                    //   status: "Active",
-                    // ),
-                    // MyCard(
-                    //   status: "Active",
-                    // ),
-                    // MyCard(
-                    //   status: "Active",
-                    // ),
-                    // MyCard(
-                    //   status: "Active",
-                    // ),
-                  ],
-                ),
+              FutureBuilder(
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return Expanded(
+                      child: ListView.builder(
+                          itemCount: mp["internships"].length,
+                          itemBuilder: (context, index) {
+                            return MyCard(status: mp["internships"][index]["isAvailable"] ? "Available" : "Closed",name: mp["internships"][index]["name"],start: mp["internships"][index]["startDate"],stipend: mp["internships"][index]["stipend"],dur: mp["internships"][index]["endDate"],mode: mp["internships"][index]["mode"],prof: "Dr. Rahul kala",faculty: 1,id: mp["internships"][index]["_id"],);
+
+                          }),
+                    );
+                  }
+
+                  print(snapshot.connectionState);
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+                future: getData(),
               ),
             ],
           ),
@@ -91,3 +106,4 @@ class _FacultyHomeScreenState extends State<FacultyHomeScreen> {
     );
   }
 }
+//asdawd

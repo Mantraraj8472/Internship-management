@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:internship_management/screens/loginscreen.dart';
 import 'package:internship_management/widgets/my_card.dart';
 import 'package:internship_management/networking.dart';
 
@@ -51,6 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     "Hi, Samarth",
                     style: TextStyle(fontSize: 24),
                   ),
+                  IconButton(onPressed: ()async{
+                    await func.logout();
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> Loginpage()));
+                  }, icon: Icon(Icons.logout))
                 ],
               ),
               SizedBox(
@@ -63,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: ListView.builder(
                           itemCount: mp["internships"].length,
                           itemBuilder: (context, index) {
-                            return MyCard(status: "Available",name: mp["internships"][index]["name"],start: mp["internships"][index]["startDate"],stipend: mp["internships"][index]["stipend"],dur: mp["internships"][index]["endDate"],mode: mp["internships"][index]["mode"],prof: mp["faculty"][index],isfac: false,id: mp["internships"][index]["_id"],);
+                            return MyCard(status: "Available",name: mp["internships"][index]["name"],start: mp["internships"][index]["startDate"],stipend: mp["internships"][index]["stipend"],dur: mp["internships"][index]["endDate"],mode: mp["internships"][index]["mode"],prof: mp["faculty"][index],faculty: 2,id: mp["internships"][index]["_id"],);
 
                           }),
                     );

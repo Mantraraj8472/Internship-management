@@ -49,7 +49,7 @@ class _Proffesor_PageState extends State<Proffesor_Page> {
                       child: ListView.builder(
                           itemCount: mp["faculty"].length,
                           itemBuilder: (context, index) {
-                            return ProffCard(name: mp["faculty"][index]["name"],des: mp["faculty"][index]["description"],link: mp["faculty"][index]["siteLink"],contact: mp["faculty"][index]["contactNo"],num: mp["faculty"][index]["internshipsOpened"].length.toString(),qualifications:mp["faculty"][index]["qualifications"],id: mp["faculty"][index]["_id"],);
+                            return ProffCard(name: mp["faculty"][index]["name"],des: mp["faculty"][index]["description"],link: mp["faculty"][index]["siteLink"],contact: mp["faculty"][index]["contactNo"],num: mp["faculty"][index]["internshipsOpened"].length.toString(),qualifications:mp["faculty"][index]["qualifications"],id: mp["faculty"][index]["_id"],faculty: 2,);
 
                           }),
                     );

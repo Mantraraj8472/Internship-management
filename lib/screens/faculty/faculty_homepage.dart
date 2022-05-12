@@ -4,6 +4,7 @@ import 'package:internship_management/screens/faculty/faculty_chat.dart';
 import 'package:internship_management/screens/faculty/faculty_homescreen.dart';
 import 'package:internship_management/screens/faculty/faculty_proff.dart';
 import 'package:internship_management/screens/faculty/faculty_profile.dart';
+import 'package:internship_management/networking.dart';
 
 class FacultyHome extends StatefulWidget {
   const FacultyHome({Key? key}) : super(key: key);
@@ -21,7 +22,6 @@ class _FacultyHomeState extends State<FacultyHome> {
       _selectedIndex = index;
     });
   }
-
   List<Widget> _pages = [
     FacultyHomeScreen(),
     FacultyProff(),

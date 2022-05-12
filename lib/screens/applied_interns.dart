@@ -57,7 +57,7 @@ class _Applied_InternsState extends State<Applied_Interns> {
                               dur: mp["internships"][index]["endDate"],
                               mode: mp["internships"][index]["mode"],
                               prof: mp["faculty"][index],
-                              isfac: false,
+                              faculty: 2,
                               id: mp["student"][index]["id"],
                             );
                           }),
